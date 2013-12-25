@@ -32,7 +32,6 @@ public class CustomArrayAdapter extends ArrayAdapter<String> {
         TextView textView2 = (TextView)rowView.findViewById(R.id.text2);
         textView2.setText(objects.get(position) + " dupa");
 
-
 //        ImageView imageView = (ImageView)rowView.findViewById(R.id.flag);
 //        imageView.setImageResource(R.drawable.ic);
 
