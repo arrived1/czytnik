@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class CustomeArrayAdapter extends ArrayAdapter<String> {
+public class CustomArrayAdapter extends ArrayAdapter<String> {
     private Context context;
     private List<String> objects;
 
-    public CustomeArrayAdapter(Context context, List<String> objects) {
+    public CustomArrayAdapter(Context context, List<String> objects) {
         super(context, R.layout.list_item, objects);
 
         this.context = context;

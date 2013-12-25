@@ -6,17 +6,17 @@ import android.os.Bundle;
 //A placeholder fragment containing a simple view.
 public class PlaceholderFragment extends ListFragment {
 
-    public static CustomeList newInstance(int sectionNumber) {
+    public static CustomList newInstance(int sectionNumber) {
 
-        CustomeList fragment;
+        CustomList fragment;
         if(sectionNumber == 1) {
-            fragment = new CustomeList();
+            fragment = new CustomList();
         }
         else if(sectionNumber == 2) {
-            fragment = new CustomeList();
+            fragment = new CustomList();
         }
         else {
-            fragment = new CustomeList();
+            fragment = new CustomList();
         }
 
         Bundle args = new Bundle();
