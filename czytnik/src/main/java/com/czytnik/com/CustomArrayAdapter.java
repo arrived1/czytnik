@@ -2,7 +2,6 @@ package com.czytnik.com;
 
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +13,13 @@ import java.util.Vector;
 
 public class CustomArrayAdapter extends ArrayAdapter<RSSItem> {
     private Context context;
-    private List<RSSItem> objects = new Vector<RSSItem>();
+    private List<RSSItem> rssItems = new Vector<RSSItem>();
 
-    public CustomArrayAdapter(Context context, List<RSSItem> objects) {
-        super(context, R.layout.list_item, objects);
+    public CustomArrayAdapter(Context context, List<RSSItem> rssItems) {
+        super(context, R.layout.list_item, rssItems);
 
         this.context = context;
-        this.objects = objects;
+        this.rssItems = rssItems;
     }
 
     @Override
@@ -29,10 +28,10 @@ public class CustomArrayAdapter extends ArrayAdapter<RSSItem> {
         View rowView = inflater.inflate(R.layout.list_item, parent, false);
 
         TextView textView1 = (TextView)rowView.findViewById(R.id.text1);
-        textView1.setText(objects.get(position).getTitle());
+        textView1.setText(rssItems.get(position).getTitle());
 
         TextView textView2 = (TextView)rowView.findViewById(R.id.text2);
-        textView2.setText(objects.get(position).getDescription());
+        textView2.setText(rssItems.get(position).getDescription());
 
 //        ImageView imageView = (ImageView)rowView.findViewById(R.id.flag);
 //        imageView.setImageResource(R.drawable.ic);
