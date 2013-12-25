@@ -5,9 +5,7 @@ import android.os.Bundle;
 
 public class PlaceholderFragment extends ListFragment {
 
-    public static CustomList newInstance(int sectionNumber) {
-
-        RSSFeedManager feedMgr = new RSSFeedManager();
+    public static CustomList newInstance(RSSFeedManager feedMgr, int sectionNumber) {
 
         CustomList fragment;
         if(sectionNumber == 1) {
@@ -23,7 +21,7 @@ public class PlaceholderFragment extends ListFragment {
         Bundle args = new Bundle();
         args.putInt("name", sectionNumber);
         fragment.setArguments(args);
-        return fragment;
 
+        return fragment;
     }
 }
