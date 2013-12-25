@@ -9,23 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import java.util.Arrays;
-import java.util.Vector;
 
 public class CustomList extends ListFragment {
-    private Vector<RSSFeed> feeds = new Vector<RSSFeed>();
+    private RSSFeed feed;
 
     public CustomList(RSSFeed feed) {
-        this.feeds.add(feed);
-    }
-
-    public CustomList() {
-        this.feeds = null;
+        this.feed = (feed);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        CustomArrayAdapter adapter = new CustomArrayAdapter(inflater.getContext(), feeds);
+        CustomArrayAdapter adapter = new CustomArrayAdapter(inflater.getContext(), feed.getRSSItems());
         setListAdapter(adapter);
 
         return super.onCreateView(inflater, container, savedInstanceState);

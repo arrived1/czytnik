@@ -14,9 +14,7 @@ public class MainReaderActivity extends ActionBarActivity
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private RSSFeedManager feedManager = new RSSFeedManager();
-
-    //Used to store the last screen title. For use in {@link #restoreActionBar()}.
-    private CharSequence mTitle;
+    private CharSequence mTitle;   //Used to store the last screen title. For use in {@link #restoreActionBar()}.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
