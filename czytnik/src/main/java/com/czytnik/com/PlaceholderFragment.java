@@ -2,28 +2,26 @@ package com.czytnik.com;
 
 import 	android.support.v4.app.ListFragment;
 import android.os.Bundle;
-import android.util.Log;
 
-//A placeholder fragment containing a simple view.
 public class PlaceholderFragment extends ListFragment {
 
     public static CustomList newInstance(int sectionNumber) {
-        RSSParser parser = new RSSParser();
 
-        RSSFeed feed = parser.getRSSFeed("http://www.sportowefakty.pl/siatkowka/index.rss");
+        RSSFeedManager feedMgr = new RSSFeedManager();
+
         CustomList fragment;
         if(sectionNumber == 1) {
-            fragment = new CustomList(feed);
+            fragment = new CustomList(feedMgr.getFeed(1));
         }
         else if(sectionNumber == 2) {
-            fragment = new CustomList();
+            fragment = new CustomList(feedMgr.getFeed(2));
         }
         else {
-            fragment = new CustomList();
+            fragment = new CustomList(feedMgr.getFeed(3));
         }
 
         Bundle args = new Bundle();
-//        args.putInt("name", sectionNumber);
+        args.putInt("name", sectionNumber);
         fragment.setArguments(args);
         return fragment;
 
