@@ -13,9 +13,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CustomList extends ListFragment {
+    private RSSFeed feed;
+
+    public CustomList(RSSFeed feed) {
+        this.feed = feed;
+    }
+
+    public CustomList() {
+        this.feed = null;
+    }
 
     List<String> countries = Arrays.asList(
-//            String[] countries = new String[] {
             "India",
             "Pakistan",
             "Sri Lanka",
