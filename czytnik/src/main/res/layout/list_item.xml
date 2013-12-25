@@ -22,7 +22,7 @@
         android:src="@drawable/ic_launcher" />
 
     <TextView
-        android:id="@+id/secondLine"
+        android:id="@+id/text2"
         android:layout_width="fill_parent"
         android:layout_height="26dip"
         android:layout_alignParentBottom="true"
@@ -34,9 +34,10 @@
         android:textSize="12sp" />
 
     <TextView
+        android:id="@+id/text1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/secondLine"
+        android:layout_above="@id/text2"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"

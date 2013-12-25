@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 public class MainReaderActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    //CustomeFragment managing the behaviors, interactions and presentation of the navigation drawer.
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     //Used to store the last screen title. For use in {@link #restoreActionBar()}.
