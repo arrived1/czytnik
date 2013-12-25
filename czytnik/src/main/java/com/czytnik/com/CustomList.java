@@ -10,36 +10,22 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Vector;
 
 public class CustomList extends ListFragment {
-    private RSSFeed feed;
+    private Vector<RSSFeed> feeds = new Vector<RSSFeed>();
 
     public CustomList(RSSFeed feed) {
-        this.feed = feed;
+        this.feeds.add(feed);
     }
 
     public CustomList() {
-        this.feed = null;
+        this.feeds = null;
     }
-
-    List<String> countries = Arrays.asList(
-            "India",
-            "Pakistan",
-            "Sri Lanka",
-            "China",
-            "Bangladesh",
-            "Nepal",
-            "Afghanistan",
-            "North Korea",
-            "South Korea",
-            "Japan"
-    );
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        CustomArrayAdapter adapter = new CustomArrayAdapter(inflater.getContext(), countries);
+        CustomArrayAdapter adapter = new CustomArrayAdapter(inflater.getContext(), feeds);
         setListAdapter(adapter);
 
         return super.onCreateView(inflater, container, savedInstanceState);

@@ -2,6 +2,7 @@ package com.czytnik.com;
 
 import 	android.support.v4.app.ListFragment;
 import android.os.Bundle;
+import android.util.Log;
 
 //A placeholder fragment containing a simple view.
 public class PlaceholderFragment extends ListFragment {
@@ -9,7 +10,7 @@ public class PlaceholderFragment extends ListFragment {
     public static CustomList newInstance(int sectionNumber) {
         RSSParser parser = new RSSParser();
 
-        RSSFeed feed = parser.getRSSFeed("http://www.sportowefakty.pl/pilka-reczna/index.rss");
+        RSSFeed feed = parser.getRSSFeed("http://www.sportowefakty.pl/siatkowka/index.rss");
         CustomList fragment;
         if(sectionNumber == 1) {
             fragment = new CustomList(feed);
