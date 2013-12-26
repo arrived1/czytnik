@@ -13,7 +13,6 @@ public class RSSItem {
         this.title = title;
         this.link = link;
         this.description = description;
-//        this.pubdate = pubdate;
         this.guid = guid;
 
         StringParser parser = new StringParser();
@@ -40,23 +39,23 @@ public class RSSItem {
         return guid;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setPubdate(String pubdate) {
-        this.pubdate = pubdate;
-    }
-
-    public void setGuid(String guid) {
-        this.guid = guid;
-    }
+//    public void setTitle(String title) {
+//        this.title = title;
+//    }
+//
+//    public void setLink(String link) {
+//        this.link = link;
+//    }
+//
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
+//
+//    public void setPubdate(String pubdate) {
+//        this.pubdate = pubdate;
+//    }
+//
+//    public void setGuid(String guid) {
+//        this.guid = guid;
+//    }
 }

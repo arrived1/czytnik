@@ -5,8 +5,6 @@ public class RSSImage {
     private String title;
     private String URL;
 
-    public RSSImage() {}
-
     public RSSImage(String link, String title, String URL) {
         this.link = link;
         this.title = title;
@@ -25,15 +23,15 @@ public class RSSImage {
         return URL;
     }
 
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
+//    public void setLink(String link) {
+//        this.link = link;
+//    }
+//
+//    public void setTitle(String title) {
+//        this.title = title;
+//    }
+//
+//    public void setURL(String URL) {
+//        this.URL = URL;
+//    }
 }

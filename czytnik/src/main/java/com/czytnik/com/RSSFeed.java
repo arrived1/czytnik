@@ -12,8 +12,6 @@ public class RSSFeed {
     private String atomlink;
     private List<RSSItem> rssItems;
 
-    public RSSFeed() {}
-
     public RSSFeed(String title,
                    String description,
                    String pubdate,
@@ -68,31 +66,31 @@ public class RSSFeed {
         this.title = title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setPubdate(String pubdate) {
-        this.pubdate = pubdate;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public void setGenerator(String generator) {
-        this.generator = generator;
-    }
-
-    public void setRSSImage(RSSImage RSSImage) {
-        this.rssImage = RSSImage;
-    }
-
-    public void setAtomlink(String atomlink) {
-        this.atomlink = atomlink;
-    }
-
-    public void setRSSItems(List<RSSItem> RSSItems) {
-        this.rssItems = RSSItems;
-    }
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
+//
+//    public void setPubdate(String pubdate) {
+//        this.pubdate = pubdate;
+//    }
+//
+//    public void setLink(String link) {
+//        this.link = link;
+//    }
+//
+//    public void setGenerator(String generator) {
+//        this.generator = generator;
+//    }
+//
+//    public void setRSSImage(RSSImage RSSImage) {
+//        this.rssImage = RSSImage;
+//    }
+//
+//    public void setAtomlink(String atomlink) {
+//        this.atomlink = atomlink;
+//    }
+//
+//    public void setRSSItems(List<RSSItem> RSSItems) {
+//        this.rssItems = RSSItems;
+//    }
 }
