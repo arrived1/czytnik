@@ -31,7 +31,7 @@ public class CustomArrayAdapter extends ArrayAdapter<RSSItem> {
         textView1.setText(rssItems.get(position).getTitle());
 
         TextView textView2 = (TextView)rowView.findViewById(R.id.text2);
-        textView2.setText(rssItems.get(position).getDescription());
+        textView2.setText(rssItems.get(position).getPubdate());
 
 //        ImageView imageView = (ImageView)rowView.findViewById(R.id.flag);
 //        imageView.setImageResource(R.drawable.ic);
