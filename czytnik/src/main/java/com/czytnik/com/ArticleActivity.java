@@ -1,13 +1,9 @@
 package com.czytnik.com;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-/**
- * Created by SG0220055 on 12/25/13.
- */
 public class ArticleActivity extends Activity {
 
     @Override
@@ -15,8 +11,11 @@ public class ArticleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
 
+        Bundle data = getIntent().getExtras();
+        RSSItemParcelable item = (RSSItemParcelable) data.getParcelable("ARTICLE");
+
         TextView textView1 = (TextView)findViewById(R.id.articleTxt);
-        textView1.setText("Dziala");
+        textView1.setText(item.getDescription());
 
     }
 

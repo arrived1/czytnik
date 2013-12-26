@@ -34,6 +34,10 @@ public class RSSFeed {
         return rssItems;
     }
 
+    public RSSItem getRSSItem(int idx) {
+        return rssItems.get(idx);
+    }
+
     public String getTitle() {
         return title;
     }
@@ -62,10 +66,10 @@ public class RSSFeed {
         return atomlink;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
+//    public void setTitle(String title) {
+//        this.title = title;
+//    }
+//
 //    public void setDescription(String description) {
 //        this.description = description;
 //    }

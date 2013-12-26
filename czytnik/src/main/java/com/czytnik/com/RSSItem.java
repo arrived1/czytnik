@@ -2,12 +2,13 @@ package com.czytnik.com;
 
 
 public class RSSItem {
-    private String title;
-    private String link;
-    private String description;
-    private String pubdate;
-    private String guid;
+    protected String title;
+    protected String link;
+    protected String description;
+    protected String pubdate;
+    protected String guid;
 
+    protected RSSItem() {}
 
     public RSSItem(String title, String link, String description, String pubdate, String guid) {
         this.title = title;

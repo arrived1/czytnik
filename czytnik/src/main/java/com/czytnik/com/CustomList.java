@@ -29,6 +29,7 @@ public class CustomList extends ListFragment {
         super.onListItemClick(l, v, position, id);
 
         Intent gameIntent = new Intent(l.getContext(), ArticleActivity.class);
+        gameIntent.putExtra("ARTICLE", new RSSItemParcelable(feed.getRSSItem(position)));
         startActivity(gameIntent);
     }
 }

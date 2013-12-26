@@ -46,9 +46,9 @@ public class StringParser {
     private String replaceString(Map<String, String> map, String date) {
         for (Map.Entry<String, String> entry : map.entrySet()) {
             String key = entry.getKey();
-            String value = entry.getValue();
 
             if(date.contains(key)) {
+                String value = entry.getValue();
                 date = date.replace(key, value);
             }
         }
