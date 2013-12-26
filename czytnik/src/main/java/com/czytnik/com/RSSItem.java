@@ -1,8 +1,6 @@
 package com.czytnik.com;
 
-/**
- * Created by SG0220055 on 11/30/13.
- */
+
 public class RSSItem {
     private String title;
     private String link;
@@ -15,8 +13,11 @@ public class RSSItem {
         this.title = title;
         this.link = link;
         this.description = description;
-        this.pubdate = pubdate;
+//        this.pubdate = pubdate;
         this.guid = guid;
+
+        StringParser parser = new StringParser();
+        this.pubdate = parser.parsePubDate(pubdate);
     }
 
     public String getTitle() {
@@ -58,5 +59,4 @@ public class RSSItem {
     public void setGuid(String guid) {
         this.guid = guid;
     }
-
 }

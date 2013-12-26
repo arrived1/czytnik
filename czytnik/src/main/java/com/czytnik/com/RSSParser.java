@@ -63,7 +63,6 @@ public class RSSParser {
                 Document doc = this.getDomElement(rss_feed_xml);
                 NodeList nodeList = doc.getElementsByTagName(TAG_CHANNEL);
                 Element e = (Element) nodeList.item(0);
-                Log.d("DUPA Parser", "Parsing xml");
 
                 // RSS nodes
                 String title = this.getValue(e, TAG_TITLE);
