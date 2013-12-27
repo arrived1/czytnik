@@ -1,5 +1,6 @@
 package com.czytnik.com;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -13,7 +14,7 @@ public class RSSItemParcelable extends RSSItem implements Parcelable {
     }
 
     public RSSItemParcelable(Parcel in){
-        String[] data = new String[6];
+        String[] data = new String[5];
 
         in.readStringArray(data);
         this.title = data[0];
@@ -21,7 +22,8 @@ public class RSSItemParcelable extends RSSItem implements Parcelable {
         this.description = data[2];
         this.pubdate = data[3];
         this.guid = data[4];
-        this.bmpLink = data[5];
+
+        this.bmpImg = (Bitmap)in.readParcelable(Bitmap.class.getClassLoader());
     }
 
     @Override
@@ -36,8 +38,9 @@ public class RSSItemParcelable extends RSSItem implements Parcelable {
                 this.link,
                 this.description,
                 this.pubdate,
-                this.guid,
-                this.picUrl});
+                this.guid});
+
+        dest.writeParcelable(this.bmpImg, flags);
     }
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public RSSItemParcelable createFromParcel(Parcel in) {

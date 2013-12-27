@@ -122,7 +122,6 @@ public class RSSParser {
                     description = pair.second;
 
                     URL url = new URL(picUrl);
-
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoInput(true);
                     conn.connect();

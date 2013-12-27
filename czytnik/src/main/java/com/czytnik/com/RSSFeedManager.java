@@ -1,6 +1,5 @@
 package com.czytnik.com;
 
-
 import android.util.Log;
 
 import java.util.List;
@@ -18,7 +17,6 @@ public class RSSFeedManager {
 
         long starTime = System.currentTimeMillis();
         loadSites();
-
         long endTime = System.currentTimeMillis() - starTime;
         time(endTime);
 
@@ -36,9 +34,9 @@ public class RSSFeedManager {
         Log.d("DUPA", time);
     }
 
-    public List<RSSFeed> getFeeds() {
-        return feeds;
-    }
+//    public List<RSSFeed> getFeeds() {
+//        return feeds;
+//    }
 
     public RSSFeed getFeed(int pos) {
         return feeds.get(pos);
