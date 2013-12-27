@@ -14,8 +14,10 @@ public class ArticleActivity extends Activity {
         Bundle data = getIntent().getExtras();
         RSSItemParcelable item = (RSSItemParcelable) data.getParcelable("ARTICLE");
 
+        String txt = item.getDescription() + "\n\n" + item.getPicUrl();
+
         TextView textView1 = (TextView)findViewById(R.id.articleTxt);
-        textView1.setText(item.getDescription());
+        textView1.setText(txt);
 
     }
 

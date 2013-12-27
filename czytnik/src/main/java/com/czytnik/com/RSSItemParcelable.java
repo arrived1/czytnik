@@ -3,17 +3,28 @@ package com.czytnik.com;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Pair;
 
 public class RSSItemParcelable extends RSSItem implements Parcelable {
 
-    public RSSItemParcelable() {}
-
     public RSSItemParcelable(RSSItem item) {
-        super(item.getTitle(), item.getLink(), item.getDescription(), item.getPubdate(), item.getGuid());
+        super();
+//        super(item.getTitle(), item.getLink(), item.getDescription(), item.getPubdate(), item.getGuid());
+
+        this.title = item.getTitle();
+        this.link = item.getLink();
+        this.guid = item.getGuid();
+
+        StringParser parser = new StringParser();
+        this.pubdate = parser.parsePubDate(item.getPubdate());
+
+        Pair<String, String> pair = parser.parseDescribtion(item.getDescription());
+        this.picUrl = pair.first;
+        this.description = pair.second;
     }
 
     public RSSItemParcelable(Parcel in){
-        String[] data = new String[5];
+        String[] data = new String[6];
 
         in.readStringArray(data);
         this.title = data[0];
@@ -21,6 +32,7 @@ public class RSSItemParcelable extends RSSItem implements Parcelable {
         this.description = data[2];
         this.pubdate = data[3];
         this.guid = data[4];
+        this.picUrl = data[5];
     }
 
     @Override
@@ -35,7 +47,8 @@ public class RSSItemParcelable extends RSSItem implements Parcelable {
                 this.link,
                 this.description,
                 this.pubdate,
-                this.guid});
+                this.guid,
+                this.picUrl});
     }
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public RSSItemParcelable createFromParcel(Parcel in) {

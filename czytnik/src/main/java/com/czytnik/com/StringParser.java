@@ -1,7 +1,5 @@
 package com.czytnik.com;
 
-
-import android.util.Log;
 import android.util.Pair;
 
 import java.util.HashMap;

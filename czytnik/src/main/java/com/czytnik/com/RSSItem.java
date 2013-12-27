@@ -1,12 +1,15 @@
 package com.czytnik.com;
 
 
+import android.util.Pair;
+
 public class RSSItem {
     protected String title;
     protected String link;
     protected String description;
     protected String pubdate;
     protected String guid;
+    protected String picUrl;
 
     protected RSSItem() {}
 
@@ -15,9 +18,18 @@ public class RSSItem {
         this.link = link;
         this.description = description;
         this.guid = guid;
+        this.pubdate = pubdate;
 
-        StringParser parser = new StringParser();
-        this.pubdate = parser.parsePubDate(pubdate);
+//        String tmpDescription = description;
+
+//        StringParser parser = new StringParser();
+//        this.pubdate = parser.parsePubDate(pubdate);
+//
+////        if(picUrl.equals(null)) {
+//            Pair<String, String> pair = parser.parseDescribtion(description);
+//            this.picUrl = pair.first;
+//            this.description = pair.second;
+////        }
     }
 
     public String getTitle() {
@@ -38,6 +50,10 @@ public class RSSItem {
 
     public String getGuid() {
         return guid;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
     }
 
 //    public void setTitle(String title) {
