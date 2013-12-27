@@ -1,6 +1,7 @@
 package com.czytnik.com;
 
 
+import android.graphics.Bitmap;
 import android.util.Pair;
 
 public class RSSItem {
@@ -10,15 +11,18 @@ public class RSSItem {
     protected String pubdate;
     protected String guid;
     protected String picUrl;
+    protected String bmpLink;
+    protected Bitmap bmpImg;
 
     protected RSSItem() {}
 
-    public RSSItem(String title, String link, String description, String pubdate, String guid) {
+    public RSSItem(String title, String link, String description, String pubdate, String guid, Bitmap bmpImg) {
         this.title = title;
         this.link = link;
         this.description = description;
         this.guid = guid;
         this.pubdate = pubdate;
+        this.bmpImg = bmpImg;
     }
 
     public String getTitle() {
@@ -45,6 +49,10 @@ public class RSSItem {
         return picUrl;
     }
 
+    public Bitmap getbmpImg() {
+        return bmpImg;
+    }
+
 //    public void setTitle(String title) {
 //        this.title = title;
 //    }
@@ -63,5 +71,10 @@ public class RSSItem {
 //
 //    public void setGuid(String guid) {
 //        this.guid = guid;
+//
+//
+//    public void setBmpImg(String bmpImg) {
+//        this.bmpImg = bmpLink;
 //    }
+
 }

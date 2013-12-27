@@ -1,6 +1,8 @@
 package com.czytnik.com;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.StrictMode;
 import android.util.Log;
 import android.util.Pair;
@@ -24,9 +26,12 @@ import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,7 +121,15 @@ public class RSSParser {
                     String picUrl = pair.first;
                     description = pair.second;
 
-                    RSSItem rssItem = new RSSItem(title, link, description, pubdate, guid);
+                    URL url = new URL(picUrl);
+
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoInput(true);
+                    conn.connect();
+                    InputStream is = conn.getInputStream();
+                    Bitmap bmpImg = BitmapFactory.decodeStream(is);
+
+                    RSSItem rssItem = new RSSItem(title, link, description, pubdate, guid, bmpImg);
                     itemsList.add(rssItem);
                 }
             }catch(Exception e){
@@ -135,7 +148,7 @@ public class RSSParser {
                 Document doc = this.getDomElement(rss_feed_xml);
                 NodeList nodeList = doc.getElementsByTagName(TAG_CHANNEL);
                 Element e = (Element) nodeList.item(0);
-                NodeList items = e.getElementsByTagName(TAG_IMAGE); // Getting items array
+//                NodeList items = e.getElementsByTagName(TAG_IMAGE); // Getting items array
 
                 String link = this.getValue(e, TAG_LINK);
                 String title = this.getValue(e, TAG_TITLE);

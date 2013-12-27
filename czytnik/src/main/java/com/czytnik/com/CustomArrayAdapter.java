@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,8 +34,8 @@ public class CustomArrayAdapter extends ArrayAdapter<RSSItem> {
         TextView textView2 = (TextView)rowView.findViewById(R.id.text2);
         textView2.setText(rssItems.get(position).getPubdate());
 
-//        ImageView imageView = (ImageView)rowView.findViewById(R.id.flag);
-//        imageView.setImageResource(R.drawable.ic);
+        ImageView imageView = (ImageView)rowView.findViewById(R.id.icon);
+        imageView.setImageBitmap(rssItems.get(position).getbmpImg());
 
         return rowView;
     }

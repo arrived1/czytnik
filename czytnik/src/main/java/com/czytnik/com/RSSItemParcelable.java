@@ -1,14 +1,15 @@
 package com.czytnik.com;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Pair;
+
+
 
 public class RSSItemParcelable extends RSSItem implements Parcelable {
 
     public RSSItemParcelable(RSSItem item) {
-        super(item.getTitle(), item.getLink(), item.getDescription(), item.getPubdate(), item.getGuid());
+        super(item.getTitle(), item.getLink(), item.getDescription(),
+              item.getPubdate(), item.getGuid(), item.getbmpImg());
     }
 
     public RSSItemParcelable(Parcel in){
@@ -20,7 +21,7 @@ public class RSSItemParcelable extends RSSItem implements Parcelable {
         this.description = data[2];
         this.pubdate = data[3];
         this.guid = data[4];
-        this.picUrl = data[5];
+        this.bmpLink = data[5];
     }
 
     @Override
