@@ -8,19 +8,7 @@ import android.util.Pair;
 public class RSSItemParcelable extends RSSItem implements Parcelable {
 
     public RSSItemParcelable(RSSItem item) {
-        super();
-//        super(item.getTitle(), item.getLink(), item.getDescription(), item.getPubdate(), item.getGuid());
-
-        this.title = item.getTitle();
-        this.link = item.getLink();
-        this.guid = item.getGuid();
-
-        StringParser parser = new StringParser();
-        this.pubdate = parser.parsePubDate(item.getPubdate());
-
-        Pair<String, String> pair = parser.parseDescribtion(item.getDescription());
-        this.picUrl = pair.first;
-        this.description = pair.second;
+        super(item.getTitle(), item.getLink(), item.getDescription(), item.getPubdate(), item.getGuid());
     }
 
     public RSSItemParcelable(Parcel in){

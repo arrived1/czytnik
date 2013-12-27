@@ -19,17 +19,6 @@ public class RSSItem {
         this.description = description;
         this.guid = guid;
         this.pubdate = pubdate;
-
-//        String tmpDescription = description;
-
-//        StringParser parser = new StringParser();
-//        this.pubdate = parser.parsePubDate(pubdate);
-//
-////        if(picUrl.equals(null)) {
-//            Pair<String, String> pair = parser.parseDescribtion(description);
-//            this.picUrl = pair.first;
-//            this.description = pair.second;
-////        }
     }
 
     public String getTitle() {

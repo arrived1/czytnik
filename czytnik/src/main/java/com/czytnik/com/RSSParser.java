@@ -3,6 +3,7 @@ package com.czytnik.com;
 
 import android.os.StrictMode;
 import android.util.Log;
+import android.util.Pair;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -45,8 +46,9 @@ public class RSSParser {
     private static String TAG_ITEM = "item";
     private static String TAG_GUID = "guid";
     private static String TAG_URL = "url";
-
     private static String TAG_ATOM_LINK = "atom:guid";
+
+    private StringParser parser = new StringParser();
 
     public RSSParser() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -106,6 +108,13 @@ public class RSSParser {
                     String description = this.getValue(e1, TAG_DESRIPTION);
                     String pubdate = this.getValue(e1, TAG_PUB_DATE);
                     String guid = this.getValue(e1, TAG_GUID);
+
+                    //additional parsing, date and description
+                    pubdate = parser.parsePubDate(pubdate);
+
+                    Pair<String, String> pair = parser.parseDescribtion(description);
+                    String picUrl = pair.first;
+                    description = pair.second;
 
                     RSSItem rssItem = new RSSItem(title, link, description, pubdate, guid);
                     itemsList.add(rssItem);
