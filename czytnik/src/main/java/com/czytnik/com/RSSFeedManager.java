@@ -15,23 +15,11 @@ public class RSSFeedManager {
         sites.add("http://www.sportowefakty.pl/moto/index.rss");
 
 
-        long starTime = System.currentTimeMillis();
+        TimeMeasurement timeMeasurement = new TimeMeasurement();
+        timeMeasurement.start();
         loadSites();
-        long endTime = System.currentTimeMillis() - starTime;
-        time(endTime);
+        timeMeasurement.stopAndParse("DUPA, download and parse: ");
 
-    }
-
-    private void time(long interval) {
-        int tens = (int) interval;
-        int seconds = (int) interval / 1000;
-        int minutes = seconds / 60;
-        int hours = minutes / 60;
-        tens = tens % 10;
-        seconds = seconds % 60;
-
-        String time = String.format("%d:%02d:%02d.%d", hours, minutes, seconds, tens);
-        Log.d("DUPA", time);
     }
 
 //    public List<RSSFeed> getFeeds() {

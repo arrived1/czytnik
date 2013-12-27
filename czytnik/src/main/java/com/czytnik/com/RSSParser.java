@@ -54,6 +54,7 @@ public class RSSParser {
     private static String TAG_ATOM_LINK = "atom:guid";
 
     private StringParser parser = new StringParser();
+    private TimeMeasurement timeMeasurement = new TimeMeasurement();
 
     public RSSParser() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -62,8 +63,11 @@ public class RSSParser {
 
     public RSSFeed getRSSFeed(String url) {
         RSSFeed rssFeed = null;
+        timeMeasurement.start();
         String rss_feed_xml = this.getXmlFromUrl(url); // get RSS XML from rss ulr
+        timeMeasurement.stopAndParse("DUPA, download: ");
 
+        timeMeasurement.start();
         if (rss_feed_xml != null) { // check if RSS XML fetched or not
             try {
                 // parse the xml
@@ -82,6 +86,7 @@ public class RSSParser {
                 List<RSSItem> rssItems = getRSSFeedItems(url);
 
                 rssFeed = new RSSFeed(title, description, pubdate, link, generator, image, atomlink, rssItems);
+                timeMeasurement.stopAndParse("DUPA, parsing: ");
             }
             catch (Exception e) {
                 e.printStackTrace(); // Check log for errors
