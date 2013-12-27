@@ -2,6 +2,7 @@ package com.czytnik.com;
 
 
 import android.util.Log;
+import android.util.Pair;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,21 @@ public class StringParser {
         days.put("Fri", "Pt");
         days.put("Sat", "Sob");
         days.put("Sun", "Niedz");
+    }
+
+    public Pair<String, String> parseDescribtion(String describtion) {
+        String[] tmpTxt = describtion.split("/>");
+
+        String picAddres = tmpTxt[0];
+        picAddres = picAddres.replace("<img align=\"right\" src=", "");
+        picAddres = picAddres.replace("\"", "");
+
+        String tmp = tmpTxt[1];
+        tmpTxt = tmp.split("<a href=");
+
+        String news = tmpTxt[0];
+
+        return new Pair(picAddres, news);
     }
 
 
