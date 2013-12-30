@@ -10,13 +10,9 @@ import android.util.Pair;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -31,7 +27,6 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +106,8 @@ public class RSSParser {
                 NodeList items = e.getElementsByTagName(TAG_ITEM); // Getting items array
 
 
-                for(int i = 0; i < items.getLength(); i++){ // looping through each item
+                for(int i = 0; i < 3; i++){
+//                for(int i = 0; i < items.getLength(); i++){ // looping through each item
                     Element e1 = (Element) items.item(i);
 
                     String title = this.getValue(e1, TAG_TITLE);
@@ -128,32 +124,14 @@ public class RSSParser {
                     String articleUrl = pair.first.second;
                     description = pair.second;
 
-
-
-//                    URL url = new URL(picUrl);
-//                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//                    conn.setDoInput(true);
-//                    conn.connect();
-//                    InputStream is = conn.getInputStream();
-//                    Bitmap bmpImg = BitmapFactory.decodeStream(is);
-
                     TimeMeasurement timeMeasurement1 = new TimeMeasurement();
                     timeMeasurement1.start();
                     Bitmap bmpImg = downloadBitmap(picUrl);
                     timeMeasurement1.stopAndParse("DUPA, bitmap download: ");
 
                     timeMeasurement1.start();
-                    String article = downloadArticle(articleUrl);
+                    String article = getXmlFromUrl(guid);
                     timeMeasurement1.stopAndParse("DUPA, article download: ");
-
-//                    url = new URL(articleUrl);
-//                    conn = (HttpURLConnection) url.openConnection();
-//                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
-//
-//                    String line;
-//                    while ((line = br.readLine()) != null) {
-//                        article += line;
-//                    }
 
 
                     RSSItem rssItem = new RSSItem(title, link, description, article, pubdate, guid, bmpImg);
@@ -173,23 +151,6 @@ public class RSSParser {
         conn.connect();
         InputStream is = conn.getInputStream();
         return BitmapFactory.decodeStream(is);
-    }
-
-    private String downloadArticle(String articleUrl) throws IOException {
-        Log.e("DUPA", "start");
-        String article = null;
-        URL url = new URL(articleUrl);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        InputStream is = conn.getInputStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
-//        Log.e("DUPA", "connected");
-        String line;
-        while ((line = br.readLine()) != null) {
-            article += line;
-        }
-//        Log.e("DUPA", "downloaded: ");
-        return article;
     }
 
     private RSSImage getRSSImage(String rss_url){
