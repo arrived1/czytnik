@@ -10,18 +10,20 @@ public class RSSItemParcelable extends RSSItem implements Parcelable {
 
     public RSSItemParcelable(RSSItem item) {
         super(item.getTitle(), item.getLink(), item.getDescription(),
-              item.getPubdate(), item.getGuid(), item.getbmpImg());
+              item.getArticle(), item.getPubdate(), item.getGuid(),
+              item.getbmpImg());
     }
 
     public RSSItemParcelable(Parcel in){
-        String[] data = new String[5];
+        String[] data = new String[6];
 
         in.readStringArray(data);
         this.title = data[0];
         this.link = data[1];
         this.description = data[2];
-        this.pubdate = data[3];
-        this.guid = data[4];
+        this.article= data[3];
+        this.pubdate = data[4];
+        this.guid = data[5];
 
         this.bmpImg = (Bitmap)in.readParcelable(Bitmap.class.getClassLoader());
     }
@@ -37,6 +39,7 @@ public class RSSItemParcelable extends RSSItem implements Parcelable {
                 this.title,
                 this.link,
                 this.description,
+                this.article,
                 this.pubdate,
                 this.guid});
 

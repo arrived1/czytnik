@@ -31,6 +31,7 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,18 +123,40 @@ public class RSSParser {
                     //additional parsing, date and description
                     pubdate = parser.parsePubDate(pubdate);
 
-                    Pair<String, String> pair = parser.parseDescribtion(description);
-                    String picUrl = pair.first;
+                    Pair<Pair<String, String>, String> pair = parser.parseDescribtion(description);
+                    String picUrl = pair.first.first;
+                    String articleUrl = pair.first.second;
                     description = pair.second;
 
-                    URL url = new URL(picUrl);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setDoInput(true);
-                    conn.connect();
-                    InputStream is = conn.getInputStream();
-                    Bitmap bmpImg = BitmapFactory.decodeStream(is);
 
-                    RSSItem rssItem = new RSSItem(title, link, description, pubdate, guid, bmpImg);
+
+//                    URL url = new URL(picUrl);
+//                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//                    conn.setDoInput(true);
+//                    conn.connect();
+//                    InputStream is = conn.getInputStream();
+//                    Bitmap bmpImg = BitmapFactory.decodeStream(is);
+
+                    TimeMeasurement timeMeasurement1 = new TimeMeasurement();
+                    timeMeasurement1.start();
+                    Bitmap bmpImg = downloadBitmap(picUrl);
+                    timeMeasurement1.stopAndParse("DUPA, bitmap download: ");
+
+                    timeMeasurement1.start();
+                    String article = downloadArticle(articleUrl);
+                    timeMeasurement1.stopAndParse("DUPA, article download: ");
+
+//                    url = new URL(articleUrl);
+//                    conn = (HttpURLConnection) url.openConnection();
+//                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+//
+//                    String line;
+//                    while ((line = br.readLine()) != null) {
+//                        article += line;
+//                    }
+
+
+                    RSSItem rssItem = new RSSItem(title, link, description, article, pubdate, guid, bmpImg);
                     itemsList.add(rssItem);
                 }
             }catch(Exception e){
@@ -141,6 +164,32 @@ public class RSSParser {
             }
         }
         return itemsList;
+    }
+
+    private Bitmap downloadBitmap(String picUrl) throws IOException {
+        URL url = new URL(picUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setDoInput(true);
+        conn.connect();
+        InputStream is = conn.getInputStream();
+        return BitmapFactory.decodeStream(is);
+    }
+
+    private String downloadArticle(String articleUrl) throws IOException {
+        Log.e("DUPA", "start");
+        String article = null;
+        URL url = new URL(articleUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        InputStream is = conn.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+//        Log.e("DUPA", "connected");
+        String line;
+        while ((line = br.readLine()) != null) {
+            article += line;
+        }
+//        Log.e("DUPA", "downloaded: ");
+        return article;
     }
 
     private RSSImage getRSSImage(String rss_url){

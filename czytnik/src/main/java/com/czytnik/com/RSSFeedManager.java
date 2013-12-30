@@ -12,7 +12,7 @@ public class RSSFeedManager {
     public RSSFeedManager() {
         sites.add("http://www.sportowefakty.pl/siatkowka/index.rss");
         sites.add("http://www.sportowefakty.pl/koszykowka/index.rss");
-        sites.add("http://www.sportowefakty.pl/moto/index.rss");
+//        sites.add("http://www.sportowefakty.pl/moto/index.rss");
 
 
         TimeMeasurement timeMeasurement = new TimeMeasurement();
