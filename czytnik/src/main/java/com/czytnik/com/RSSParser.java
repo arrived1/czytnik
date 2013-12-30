@@ -119,9 +119,8 @@ public class RSSParser {
                     //additional parsing, date and description
                     pubdate = parser.parsePubDate(pubdate);
 
-                    Pair<Pair<String, String>, String> pair = parser.parseDescribtion(description);
-                    String picUrl = pair.first.first;
-                    String articleUrl = pair.first.second;
+                    Pair<String, String> pair = parser.parseDescribtion(description);
+                    String picUrl = pair.first;
                     description = pair.second;
 
                     TimeMeasurement timeMeasurement1 = new TimeMeasurement();

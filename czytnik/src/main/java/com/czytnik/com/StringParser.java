@@ -33,7 +33,7 @@ public class StringParser {
         days.put("Sun", "Niedz");
     }
 
-    public Pair<Pair<String, String>, String> parseDescribtion(String describtion) {
+    public Pair<String, String> parseDescribtion(String describtion) {
         String[] tmpTxt = describtion.split("/>");
 
         String picAddres = tmpTxt[0];
@@ -45,12 +45,7 @@ public class StringParser {
 
         String news = tmpTxt[0];
 
-        String articleUrl = tmpTxt[1];
-        articleUrl = articleUrl.replace(">Czytaj więcej »</a>", "");
-        articleUrl = articleUrl.replace("\"", "");
-
-
-        return new Pair(new Pair(picAddres, articleUrl), news);
+        return new Pair(picAddres, news);
     }
 
 
