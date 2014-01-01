@@ -4,8 +4,9 @@ package com.czytnik.com;
 import android.util.Log;
 
 public class TimeMeasurement {
-    private long startTime;
-    private long stopTime;
+    private long startTime = 0;
+    private long stopTime = 0;
+    private long duration = 0;
 
     public void start() {
         startTime = System.currentTimeMillis();
@@ -13,6 +14,15 @@ public class TimeMeasurement {
 
     public void stop() {
         stopTime = System.currentTimeMillis();
+    }
+
+    public void stopAndSave() {
+        stopTime = System.currentTimeMillis();
+        duration += stopTime - startTime;
+    }
+
+    public void getSavedTime(String msg) {
+        time(duration, msg);
     }
 
     public void stopAndParse(String msg) {

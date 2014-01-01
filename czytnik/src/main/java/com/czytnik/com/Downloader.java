@@ -31,6 +31,7 @@ public class Downloader {
             conn.setDoInput(true);
             conn.connect();
             InputStream is = conn.getInputStream();
+//            conn.getContentLength(); //size of downloaded data
             bitmap = BitmapFactory.decodeStream(is);
 
         } catch (IOException e) {
