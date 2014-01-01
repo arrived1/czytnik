@@ -1,18 +1,10 @@
 package com.czytnik.com;
 
-
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.StrictMode;
 import android.util.Log;
 import android.util.Pair;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -20,14 +12,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,24 +21,24 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class RSSParser {
-    // RSS XML document CHANNEL tag
+
+public class RSSDomParser {
     private static String TAG_CHANNEL = "channel";
     private static String TAG_TITLE = "title";
     private static String TAG_DESRIPTION = "description";
     private static String TAG_PUB_DATE = "pubDate";
     private static String TAG_LINK = "link";
     private static String TAG_GENERATOR = "generator";
-    private static String TAG_IMAGE = "image";
     private static String TAG_ITEM = "item";
     private static String TAG_GUID = "guid";
     private static String TAG_URL = "url";
     private static String TAG_ATOM_LINK = "atom:guid";
 
     private StringParser parser = new StringParser();
+    private Downloader downloader = new Downloader();
     private TimeMeasurement timeMeasurement = new TimeMeasurement();
 
-    public RSSParser() {
+    public RSSDomParser() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
@@ -60,7 +46,7 @@ public class RSSParser {
     public RSSFeed getRSSFeed(String url) {
         RSSFeed rssFeed = null;
         timeMeasurement.start();
-        String rss_feed_xml = this.getXmlFromUrl(url); // get RSS XML from rss ulr
+        String rss_feed_xml = downloader.getWebsiteFromUrl(url);
         timeMeasurement.stopAndParse("DUPA, download: ");
 
         timeMeasurement.start();
@@ -81,7 +67,8 @@ public class RSSParser {
                 String atomlink = this.getValue(e, TAG_ATOM_LINK);
                 List<RSSItem> rssItems = getRSSFeedItems(url);
 
-                rssFeed = new RSSFeed(title, description, pubdate, link, generator, image, atomlink, rssItems);
+                rssFeed = new RSSFeed(title, description, pubdate, link, generator,
+                                      image, atomlink, rssItems);
                 timeMeasurement.stopAndParse("DUPA, parsing: ");
             }
             catch (Exception e) {
@@ -96,7 +83,7 @@ public class RSSParser {
 
     private List<RSSItem> getRSSFeedItems(String rss_url){
         List<RSSItem> itemsList = new ArrayList<RSSItem>();
-        String rss_feed_xml = this.getXmlFromUrl(rss_url); // get RSS XML from rss url
+        String rss_feed_xml = downloader.getWebsiteFromUrl(rss_url);
 
         if(rss_feed_xml != null){ // check if RSS XML fetched or not
             try{ // parse the xml
@@ -106,7 +93,7 @@ public class RSSParser {
                 NodeList items = e.getElementsByTagName(TAG_ITEM); // Getting items array
 
 
-                for(int i = 0; i < 3; i++){
+                for(int i = 0; i < 5; i++){ // looping through each item
 //                for(int i = 0; i < items.getLength(); i++){ // looping through each item
                     Element e1 = (Element) items.item(i);
 
@@ -125,15 +112,16 @@ public class RSSParser {
 
                     TimeMeasurement timeMeasurement1 = new TimeMeasurement();
                     timeMeasurement1.start();
-                    Bitmap bmpImg = downloadBitmap(picUrl);
+                    Bitmap bmpImg = downloader.downloadBitmap(picUrl);
                     timeMeasurement1.stopAndParse("DUPA, bitmap download: ");
 
                     timeMeasurement1.start();
-                    String article = getXmlFromUrl(guid);
+                    String article = downloader.getWebsiteFromUrl(guid);
                     timeMeasurement1.stopAndParse("DUPA, article download: ");
 
 
-                    RSSItem rssItem = new RSSItem(title, link, description, article, pubdate, guid, bmpImg);
+                    RSSItem rssItem = new RSSItem(title, link, description,
+                                                  article, pubdate, guid, bmpImg);
                     itemsList.add(rssItem);
                 }
             }catch(Exception e){
@@ -143,25 +131,15 @@ public class RSSParser {
         return itemsList;
     }
 
-    private Bitmap downloadBitmap(String picUrl) throws IOException {
-        URL url = new URL(picUrl);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setDoInput(true);
-        conn.connect();
-        InputStream is = conn.getInputStream();
-        return BitmapFactory.decodeStream(is);
-    }
-
     private RSSImage getRSSImage(String rss_url){
         RSSImage image = null;
-        String rss_feed_xml = this.getXmlFromUrl(rss_url); // get RSS XML from rss url
+        String rss_feed_xml = downloader.getWebsiteFromUrl(rss_url);
 
         if(rss_feed_xml != null){ // check if RSS XML fetched or not
             try{ // parse the xml
                 Document doc = this.getDomElement(rss_feed_xml);
                 NodeList nodeList = doc.getElementsByTagName(TAG_CHANNEL);
                 Element e = (Element) nodeList.item(0);
-//                NodeList items = e.getElementsByTagName(TAG_IMAGE); // Getting items array
 
                 String link = this.getValue(e, TAG_LINK);
                 String title = this.getValue(e, TAG_TITLE);
@@ -174,29 +152,6 @@ public class RSSParser {
             }
         }
         return image;
-    }
-
-    private String getXmlFromUrl(String url) {
-        String xml = null;
-
-        try {
-            // request method is GET
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet(url);
-
-            HttpResponse httpResponse = httpClient.execute(httpGet);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            xml = EntityUtils.toString(httpEntity);
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return xml;
     }
 
     private Document getDomElement(String xml) {
@@ -229,7 +184,8 @@ public class RSSParser {
             if (elem.hasChildNodes()) {
                 for (child = elem.getFirstChild(); child != null; child = child
                         .getNextSibling()) {
-                    if (child.getNodeType() == Node.TEXT_NODE || ( child.getNodeType() == Node.CDATA_SECTION_NODE)) {
+                    if (child.getNodeType() == Node.TEXT_NODE ||
+                        (child.getNodeType() == Node.CDATA_SECTION_NODE)) {
                         return child.getNodeValue();
                     }
                 }

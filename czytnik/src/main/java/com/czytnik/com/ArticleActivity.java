@@ -17,14 +17,16 @@ public class ArticleActivity extends Activity {
         Bundle data = getIntent().getExtras();
         RSSItemParcelable item = (RSSItemParcelable) data.getParcelable("ARTICLE");
 
-        String txt = item.getDescription() + "\n\n" + item.getArticle();
+
+        String[] article =  item.getArticle().split("<div class=\"rating \">");
+        String txt = item.getDescription() + "\n\n" + article[1];
 
         TextView textView1 = (TextView)findViewById(R.id.articleTxt);
         textView1.setText(txt);
 
         ImageView imageView = (ImageView)findViewById(R.id.articlePic);
         Bitmap pic = item.getbmpImg();
-        int picSize = 250;
+        int picSize = 200;
         pic = getResizedBitmap(pic, picSize, picSize);
         imageView.setImageBitmap(pic);
 
