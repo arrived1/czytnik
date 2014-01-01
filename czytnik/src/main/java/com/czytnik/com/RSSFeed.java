@@ -10,7 +10,7 @@ public class RSSFeed {
     private String generator;
     private RSSImage rssImage;
     private String atomlink;
-    private List<RSSItem> rssItems;
+    private List<RSSItemParcelable> rssItems;
 
     public RSSFeed(String title,
                    String description,
@@ -19,7 +19,7 @@ public class RSSFeed {
                    String generator,
                    RSSImage rssImage,
                    String atomlink,
-                   List<RSSItem> rssItems) {
+                   List<RSSItemParcelable> rssItems) {
         this.title = title;
         this.description = description;
         this.pubdate = pubdate;
@@ -30,7 +30,7 @@ public class RSSFeed {
         this.rssItems = rssItems;
     }
 
-    public List<RSSItem> getRSSItems() {
+    public List<RSSItemParcelable> getRSSItems() {
         return rssItems;
     }
 

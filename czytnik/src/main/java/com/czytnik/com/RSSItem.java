@@ -3,7 +3,7 @@ package com.czytnik.com;
 
 import android.graphics.Bitmap;
 
-public class RSSItem {
+abstract class RSSItem {
     protected String title;
     protected String link;
     protected String description;

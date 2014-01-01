@@ -8,6 +8,17 @@ import android.os.Parcelable;
 
 public class RSSItemParcelable extends RSSItem implements Parcelable {
 
+    public RSSItemParcelable(String title, String link, String description,
+                             String article, String pubdate, String guid, Bitmap bmpImg) {
+        this.title = title;
+        this.link = link;
+        this.description = description;
+        this.article = article;
+        this.guid = guid;
+        this.pubdate = pubdate;
+        this.bmpImg = bmpImg;
+    }
+
     public RSSItemParcelable(RSSItem item) {
         super(item.getTitle(), item.getLink(), item.getDescription(),
               item.getArticle(), item.getPubdate(), item.getGuid(),

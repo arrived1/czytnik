@@ -65,7 +65,7 @@ public class RSSDomParser {
                 String generator = this.getValue(e, TAG_GENERATOR);
                 RSSImage image = getRSSImage(url);
                 String atomlink = this.getValue(e, TAG_ATOM_LINK);
-                List<RSSItem> rssItems = getRSSFeedItems(url);
+                List<RSSItemParcelable> rssItems = getRSSFeedItems(url);
 
                 rssFeed = new RSSFeed(title, description, pubdate, link, generator,
                                       image, atomlink, rssItems);
@@ -81,8 +81,8 @@ public class RSSDomParser {
         return rssFeed;
     }
 
-    private List<RSSItem> getRSSFeedItems(String rss_url){
-        List<RSSItem> itemsList = new ArrayList<RSSItem>();
+    private List<RSSItemParcelable> getRSSFeedItems(String rss_url){
+        List<RSSItemParcelable> itemsList = new ArrayList<RSSItemParcelable>();
         String rss_feed_xml = downloader.getWebsiteFromUrl(rss_url);
 
         if(rss_feed_xml != null){ // check if RSS XML fetched or not
@@ -120,7 +120,7 @@ public class RSSDomParser {
                     timeMeasurement1.stopAndParse("DUPA, article download: ");
 
 
-                    RSSItem rssItem = new RSSItem(title, link, description,
+                    RSSItemParcelable rssItem = new RSSItemParcelable(title, link, description,
                                                   article, pubdate, guid, bmpImg);
                     itemsList.add(rssItem);
                 }

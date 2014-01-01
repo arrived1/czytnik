@@ -12,11 +12,11 @@ import android.widget.TextView;
 import java.util.List;
 import java.util.Vector;
 
-public class CustomArrayAdapter extends ArrayAdapter<RSSItem> {
+public class CustomArrayAdapter extends ArrayAdapter<RSSItemParcelable> {
     private Context context;
-    private List<RSSItem> rssItems = new Vector<RSSItem>();
+    private List<RSSItemParcelable> rssItems = new Vector<RSSItemParcelable>();
 
-    public CustomArrayAdapter(Context context, List<RSSItem> rssItems) {
+    public CustomArrayAdapter(Context context, List<RSSItemParcelable> rssItems) {
         super(context, R.layout.list_item, rssItems);
 
         this.context = context;
