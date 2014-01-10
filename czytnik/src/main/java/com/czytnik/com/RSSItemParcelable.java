@@ -9,11 +9,11 @@ import android.os.Parcelable;
 public class RSSItemParcelable extends RSSItem implements Parcelable {
 
     public RSSItemParcelable(String title, String link, String description,
-                             String article, String pubdate, String guid, Bitmap bmpImg) {
+                             String articleLink, String pubdate, String guid, Bitmap bmpImg) {
         this.title = title;
         this.link = link;
         this.description = description;
-        this.article = article;
+        this.articleLink = articleLink;
         this.guid = guid;
         this.pubdate = pubdate;
         this.bmpImg = bmpImg;
@@ -21,7 +21,7 @@ public class RSSItemParcelable extends RSSItem implements Parcelable {
 
     public RSSItemParcelable(RSSItem item) {
         super(item.getTitle(), item.getLink(), item.getDescription(),
-              item.getArticle(), item.getPubdate(), item.getGuid(),
+              item.getArticleLink(), item.getPubdate(), item.getGuid(),
               item.getbmpImg());
     }
 
@@ -32,7 +32,7 @@ public class RSSItemParcelable extends RSSItem implements Parcelable {
         this.title = data[0];
         this.link = data[1];
         this.description = data[2];
-        this.article= data[3];
+        this.articleLink= data[3];
         this.pubdate = data[4];
         this.guid = data[5];
 
@@ -50,7 +50,7 @@ public class RSSItemParcelable extends RSSItem implements Parcelable {
                 this.title,
                 this.link,
                 this.description,
-                this.article,
+                this.articleLink,
                 this.pubdate,
                 this.guid});
 

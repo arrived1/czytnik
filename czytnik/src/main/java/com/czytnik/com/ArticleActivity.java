@@ -19,8 +19,8 @@ public class ArticleActivity extends Activity {
         RSSItemParcelable item = (RSSItemParcelable) data.getParcelable("ARTICLE");
 
 
-        String[] article =  item.getArticle().split("<div class=\"rating \">");
-        String txt = item.getDescription() + "\n\n" + article[1];
+//        String[] article =  item.getArticleLink().split("<div class=\"rating \">");
+        String txt = item.getArticleLink();// item.getDescription() + "\n\n" + article[1];
 
         TextView textView1 = (TextView)findViewById(R.id.articleTxt);
         textView1.setText(txt);

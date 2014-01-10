@@ -7,7 +7,7 @@ abstract class RSSItem {
     protected String title;
     protected String link;
     protected String description;
-    protected String article;
+    protected String articleLink;
     protected String pubdate;
     protected String guid;
     protected Bitmap bmpImg;
@@ -18,7 +18,7 @@ abstract class RSSItem {
         this.title = title;
         this.link = link;
         this.description = description;
-        this.article = article;
+        this.articleLink = article;
         this.guid = guid;
         this.pubdate = pubdate;
         this.bmpImg = bmpImg;
@@ -36,8 +36,8 @@ abstract class RSSItem {
         return description;
     }
 
-    public String getArticle() {
-        return article;
+    public String getArticleLink() {
+        return articleLink;
     }
 
     public String getPubdate() {

@@ -112,19 +112,13 @@ public class RSSDomParser {
                     String picUrl = pair.first;
                     description = pair.second;
 
-                    TimeMeasurement timeMeasurement1 = new TimeMeasurement();
-                    timeMeasurement1.start();
+//                    TimeMeasurement timeMeasurement1 = new TimeMeasurement();
+//                    timeMeasurement1.start();
                     Bitmap bmpImg = downloader.downloadBitmap(picUrl);
-                    timeMeasurement1.stopAndParse("DUPA, bitmap download: ");
-
-                    timeMeasurement1.start();
-                    String article = downloader.getWebsiteFromUrl(guid);
-                    timeMeasurement1.stopAndParse("DUPA, article download: ");
-                    parseArticle(guid);
-
+//                    timeMeasurement1.stopAndParse("DUPA, bitmap download: ");
 
                     RSSItemParcelable rssItem = new RSSItemParcelable(title, link, description,
-                                                  article, pubdate, guid, bmpImg);
+                                                                      guid, pubdate, guid, bmpImg);
                     itemsList.add(rssItem);
                 }
             }catch(Exception e){
@@ -132,37 +126,6 @@ public class RSSDomParser {
             }
         }
         return itemsList;
-    }
-
-    private void parseArticle(String url) {
-        try {
-            Log.e("DUPAAAAAAA --------------------------------------------------------->", "");
-            Log.e("DUPAAAAAAA url", url);
-            org.jsoup.nodes.Document doc;
-            doc = Jsoup.connect(url).get(); // need http protocol
-
-            String title = doc.title();  // get page title
-            Log.e("DUPAAAAAAA", "title : " + title);
-
-            String additionalArticles = "Więcej";
-
-            Elements paragraphs = doc.select("article").first().select("p");
-            List<String> body = new ArrayList<String>();
-            for (org.jsoup.nodes.Element p : paragraphs)
-            {
-                String paragraph = p.text();
-                if(!paragraph.contains(additionalArticles)) {
-                     body.add(p.text());
-                     Log.e("DUPAAAAAAA", paragraph + "\n");
-                }
-            }
-//            Log.e("DUPAAAAAAA", "article : " + body);
-
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private RSSImage getRSSImage(String rss_url){
