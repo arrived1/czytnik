@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 public class ArticleActivity extends Activity {
 
     @Override
@@ -31,6 +32,8 @@ public class ArticleActivity extends Activity {
         imageView.setImageBitmap(pic);
 
     }
+
+
 
     public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
         int width = bm.getWidth();
